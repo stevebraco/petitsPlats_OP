@@ -1,0 +1,14 @@
+@mixin posAbsoluteIcon($right:15px) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: $right;
+}
+
+@mixin inputSearch($background) {
+  background: $background;
+  height: 69px;
+  padding-left: 1.5rem;
+  width: 100%;
+  
+}

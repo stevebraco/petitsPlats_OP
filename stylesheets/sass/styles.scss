@@ -1,0 +1,157 @@
+@import './reset.scss';
+@import './variables.scss';
+@import './mixins.scss';
+
+body {
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: 0 7rem;
+  font-family: $fonts;
+}
+
+input {
+  border-radius: $border-radius;
+  border: none;
+  outline: none;
+}
+
+// HEADER
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.7rem;
+  &__logo {
+  }
+  &__container-input {
+    position: relative;
+    width: 100%;
+  }
+  &__search {
+    width: 100%;
+    height: 69px;
+    padding-left: 2.4rem;
+    background-color: $light-gray;
+  }
+  ::placeholder {
+    color: rgba($color: #000000, $alpha: 0.25);
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  &__icon-search {
+    @include posAbsoluteIcon;
+  }
+}
+
+// ADVANCED SEARCH
+
+.advanced-search {
+  display: flex;
+  gap: 2rem;
+
+  &__wrapper {
+    position: relative;
+    // width: 170px;
+    ::placeholder {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 18px;
+    }
+  }
+
+  &__container {
+    position: relative;
+  }
+
+  &__wrapper.active {
+    position: relative;
+    width: 667px;
+    // height: 397px;
+    // background-color: $blue;
+  }
+  &__input-i {
+    @include inputSearch($blue);
+  }
+
+  &__input-a {
+    @include inputSearch($green);
+  }
+
+  &__input-u {
+    @include inputSearch($red);
+  }
+
+  &__arrow-down {
+    @include posAbsoluteIcon;
+  }
+
+  &__article {
+    display: none;
+    padding: 4rem 1.9rem 4rem 2.6rem;
+    position: absolute;
+    top: 5rem;
+    width: 667px;
+    background-color: $blue;
+    border-radius: $border-radius;
+  }
+  &__article.show {
+    display: block;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: #ffffff;
+  }
+}
+
+// CARD
+
+.cards {
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5rem;
+  }
+}
+
+.card {
+  max-width: 380px;
+  margin-bottom: 15px;
+
+  &__figure {
+    width: 100%;
+    height: 178px;
+    background-color: #c7bebe;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__content {
+    background-color: $light-gray;
+    padding: 20px;
+  }
+
+  &__recette {
+    padding: 12px;
+  }
+}
