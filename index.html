@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./stylesheets/styles.css">
+  <title>Les petits plats</title>
+</head>
+
+<body>
+  <header class="header">
+    <img class="header__logo" src="./images/logo-header.svg" alt="logo les petits plats">
+    <div class="header__container-input">
+      <input type="text" placeholder="Rechercher une recette" id='main-search' class="header__search">
+      <img src="./images/icon-search.svg" alt="icon search" class="header__icon-search">
+    </div>
+  </header>
+  <main>
+    <section class="advanced-search">
+      <div class="advanced-search__container" id='container-ing'>
+        <div class="advanced-search__wrapper">
+          <input class="input-advanced advanced-search__input-i" placeholder="Ingredients" name='Ingrédients'
+            type="text">
+          <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+        </div>
+      </div>
+
+      <div class="advanced-search__container" id='container-app'>
+        <div class="advanced-search__wrapper">
+          <input class="input-advanced advanced-search__input-a" placeholder="Appareils" name='Appareils' type="text">
+          <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+        </div>
+      </div>
+
+      <div class="advanced-search__container" id="container-ust">
+        <div class="advanced-search__wrapper">
+          <input class="input-advanced advanced-search__input-u" placeholder="Ustensiles" name="Ustensiles" type="text">
+          <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+        </div>
+      </div>
+    </section>
+    <section class="cards">
+      <div class="cards__container">
+        <article class='card'>
+          <figure class="card__figure">
+            <!-- <img src="" alt=""> -->
+          </figure>
+          <div class="card__content">
+            <div class="card__info">
+              <h2 class="card__title">Limonade de Coco</h2>
+              <div class="card__time"> <img src="./images/icon-time.svg" alt="icon time"> <span>10 min</span> </div>
+            </div>
+            <div class="card__description">
+              <div class="card__ingredients">
+                Lait de coco: 400ml
+                Jus de citron: 2
+                Créme de coco: 4 cuillères
+                Sucre: 20g
+                Glaçons: 2
+
+              </div>
+              <p class="card__recette">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de
+                coco,
+                le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+<script type="module" src="./js/app.js"></script>
+<script type="module" src="./js/searchAdvanced.js"></script>
+
+</html>
