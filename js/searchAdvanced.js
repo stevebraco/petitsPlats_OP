@@ -11,6 +11,12 @@ const searchIngredients = document.querySelectorAll(
   '.advanced-search__wrapper'
 );
 
+const containerAdvancedSearchList = document.querySelector(
+  '.advanced-search__selected'
+);
+
+let inputId;
+
 const recipesFilter = (filterName) => {
   let arr;
   if (filterName == 'ingrédients') {
@@ -19,7 +25,6 @@ const recipesFilter = (filterName) => {
         recipes
           .map((t) => t.ingredients.map((i) => i.ingredient.toLowerCase()))
           .flat()
-          .slice(0, 36)
       ),
     ];
   }
@@ -39,7 +44,18 @@ const recipesFilter = (filterName) => {
 };
 
 const displaydata = (arr) => {
-  return arr.map((t) => `<p> ${t} </p>`).join('');
+  return arr
+    .map((t) => `<p class='advanced-search__recipe'> ${t} </p>`)
+    .join('');
+};
+
+const displayLilSearch = (arr) => {
+  return arr
+    .map(
+      (t) =>
+        `<button type='button' class='btn__selected btn__${t.inputId}'> <span>${t.value}</span> <img src='./images/icon-close.svg' />  </button>`
+    )
+    .join('');
 };
 
 const displaySearchAdvanced = (arr, container) => {
@@ -55,7 +71,10 @@ const displaySearchAdvanced = (arr, container) => {
 };
 
 // Display recipes
-displaySearchAdvanced(recipesFilter('ingrédients'), containerIngredients);
+displaySearchAdvanced(
+  recipesFilter('ingrédients').slice(0, 36),
+  containerIngredients
+);
 displaySearchAdvanced(recipesFilter('appareils'), containerAppareils);
 displaySearchAdvanced(recipesFilter('ustensiles'), containerUstensils);
 
@@ -66,6 +85,8 @@ for (let i = 0; i < searchIngredients.length; i++) {
   const list = document.querySelectorAll('.advanced-search__list');
 
   searchIngredients[i].addEventListener('click', function (e) {
+    inputId = e.target.id;
+
     // array onClick
     filterName = recipesFilter(this.childNodes[1].name.toLowerCase());
 
@@ -91,29 +112,46 @@ for (let i = 0; i < searchIngredients.length; i++) {
 
   inputs[i].addEventListener('keyup', function (e) {
     let keyboard = e.target.value;
-    let suggestions = [];
+    let suggestions = filterName;
     if (keyboard) {
       suggestions = filterName.filter((data) => {
         return data.toLowerCase().includes(keyboard.toLowerCase());
       });
     }
 
-    if (!keyboard) {
-      list[i].innerHTML = displaydata(filterName);
-    } else {
-      list[i].innerHTML = displaydata(suggestions);
-    }
+    list[i].innerHTML = displaydata(suggestions.slice(0, 36));
   });
 }
 
 document.addEventListener('click', function (e) {
   const article = document.querySelectorAll('.advanced-search__article');
 
-  console.log('click');
   if (e.target.className.includes('input-advanced')) {
     return;
   } else {
     setClass(searchIngredients, 'remove', 'active');
     setClass(article, 'remove', 'show');
   }
+});
+
+let searchListIng = [];
+
+let containerRecipe = document.querySelectorAll('.advanced-search__recipe');
+containerRecipe.forEach((element) => {
+  element.addEventListener('click', () => {
+    let value = element.textContent;
+    searchListIng.push({ value, inputId });
+    const list = displayLilSearch(searchListIng);
+    containerAdvancedSearchList.innerHTML = list;
+
+    // btnSelected.forEach((element) =>
+    //   element.addEventListener('click', function () {
+    //     let test = searchListIng.filter(
+    //       (select) => select.value.trim() !== element.textContent.trim()
+    //     );
+    //     const list = displayLilSearch(test);
+    //     containerAdvancedSearchList.innerHTML = list;
+    //   })
+    // );
+  });
 });

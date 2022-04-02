@@ -7,28 +7,37 @@ mainSearch.addEventListener('keyup', (e) => {
   const filterRecipes = recipes.filter((recipe) => {
     return (
       recipe.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-      recipe.description.toLowerCase().includes(e.target.value.toLowerCase())
+      recipe.description.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      recipe.ingredients.find((t) =>
+        t.ingredient.includes(e.target.value.toLowerCase())
+      )
+      //TODO Description
     );
   });
   displayRecipes(filterRecipes);
 });
 
+const displayIngredients = (arr) => {
+  return arr
+    .map((ingredient) => {
+      const quantity = `${
+        ingredient.quantity
+          ? `${ingredient.ingredient}: ${ingredient.quantity}`
+          : `${ingredient.ingredient}`
+      }`;
+
+      const init = `${ingredient.unit ? `${ingredient.unit}` : ''}`;
+
+      return `<span> ${quantity} ${init} </span>`;
+    })
+    .join('');
+};
+
 const displayRecipes = (recipes) => {
   const model = recipes
     .map((recipe) => {
-      const ingrendients = recipe.ingredients
-        .map((ingredient) => {
-          const quantity = `${
-            ingredient.quantity
-              ? `${ingredient.ingredient}: ${ingredient.quantity}`
-              : `${ingredient.ingredient}`
-          }`;
-
-          const init = `${ingredient.unit ? `${ingredient.unit}` : ''}`;
-
-          return `<span> ${quantity} ${init} </span>`;
-        })
-        .join('');
+      const { ingredients } = recipe;
+      const ingrendientsList = displayIngredients(ingredients);
       return `<article class='card'>
     <figure class="card__figure">
       <!-- <img src="" alt=""> -->
@@ -41,7 +50,7 @@ const displayRecipes = (recipes) => {
       </div>
       <div class="card__description">
         <div class="card__ingredients">
-        ${ingrendients}
+        ${ingrendientsList}
         </div>
         <p class="card__recette">${recipe.description.substring(0, 200)}...</p>
       </div>
