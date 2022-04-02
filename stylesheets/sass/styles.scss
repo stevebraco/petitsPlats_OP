@@ -14,6 +14,35 @@ input {
   border: none;
   outline: none;
 }
+button {
+  border: none;
+  color: white;
+  padding: 0 20px;
+  display: inline-block;
+}
+
+// button
+.btn {
+  &__selected {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+    border-radius: $border-radius;
+    height: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+  &__ingredients {
+    background: $blue;
+  }
+  &__appareils {
+    background: $green;
+  }
+  &__ustensiles {
+    background: $red;
+  }
+}
 
 // HEADER
 .header {
@@ -22,6 +51,7 @@ input {
   justify-content: center;
   flex-direction: column;
   gap: 1.7rem;
+  padding-top: 4.2rem;
   &__logo {
   }
   &__container-input {
@@ -50,6 +80,7 @@ input {
 .advanced-search {
   display: flex;
   gap: 2rem;
+  flex-direction: column;
 
   &__wrapper {
     position: relative;
@@ -63,6 +94,17 @@ input {
 
   &__container {
     position: relative;
+  }
+
+  &__selected {
+    padding: 2.5rem 0 1.5rem;
+    display: flex;
+    gap: 1rem;
+  }
+  &__container-inputs {
+    display: flex;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
   }
 
   &__wrapper.active {
@@ -107,6 +149,10 @@ input {
     font-weight: 400;
     font-size: 1.8rem;
     color: #ffffff;
+  }
+
+  &__recipe {
+    text-transform: capitalize;
   }
 }
 

@@ -91,12 +91,40 @@ input {
   outline: none;
 }
 
+button {
+  border: none;
+  color: white;
+  padding: 0 20px;
+  display: inline-block;
+}
+
+.btn__selected {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  border-radius: 5px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.btn__ingredients {
+  background: #3282F7;
+}
+.btn__appareils {
+  background: #68D9A4;
+}
+.btn__ustensiles {
+  background: #ED6454;
+}
+
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 1.7rem;
+  padding-top: 4.2rem;
 }
 .header__container-input {
   position: relative;
@@ -123,6 +151,7 @@ input {
 .advanced-search {
   display: flex;
   gap: 2rem;
+  flex-direction: column;
 }
 .advanced-search__wrapper {
   position: relative;
@@ -134,6 +163,16 @@ input {
 }
 .advanced-search__container {
   position: relative;
+}
+.advanced-search__selected {
+  padding: 2.5rem 0 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+.advanced-search__container-inputs {
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
 }
 .advanced-search__wrapper.active {
   position: relative;
@@ -182,6 +221,9 @@ input {
   font-weight: 400;
   font-size: 1.8rem;
   color: #ffffff;
+}
+.advanced-search__recipe {
+  text-transform: capitalize;
 }
 
 .cards__container {
