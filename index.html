@@ -19,25 +19,33 @@
   </header>
   <main>
     <section class="advanced-search">
-      <div class="advanced-search__container" id='container-ing'>
-        <div class="advanced-search__wrapper">
-          <input class="input-advanced advanced-search__input-i" placeholder="Ingredients" name='Ingrédients'
-            type="text">
-          <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+      <div class="advanced-search__selected"></div>
+      <div class="advanced-search__container-inputs">
+        <!-- INPUT INGREDIENTS -->
+        <div class="advanced-search__container" id='container-ing'>
+          <div class="advanced-search__wrapper">
+            <input class="input-advanced advanced-search__input-i" placeholder="Ingredients" name='Ingrédients'
+              id="ingredients" type="text">
+            <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+          </div>
         </div>
-      </div>
 
-      <div class="advanced-search__container" id='container-app'>
-        <div class="advanced-search__wrapper">
-          <input class="input-advanced advanced-search__input-a" placeholder="Appareils" name='Appareils' type="text">
-          <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+        <!-- INPUT APPAREILS -->
+        <div class="advanced-search__container" id='container-app'>
+          <div class="advanced-search__wrapper">
+            <input class="input-advanced advanced-search__input-a" placeholder="Appareils" name='Appareils' type="text"
+              id="appareils">
+            <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+          </div>
         </div>
-      </div>
 
-      <div class="advanced-search__container" id="container-ust">
-        <div class="advanced-search__wrapper">
-          <input class="input-advanced advanced-search__input-u" placeholder="Ustensiles" name="Ustensiles" type="text">
-          <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+        <!-- INPUT USTENSILES -->
+        <div class="advanced-search__container" id="container-ust">
+          <div class="advanced-search__wrapper">
+            <input class="input-advanced advanced-search__input-u" placeholder="Ustensiles" name="Ustensiles"
+              type="text" id='ustensiles'>
+            <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
+          </div>
         </div>
       </div>
     </section>
