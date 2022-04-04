@@ -9,7 +9,7 @@
         "sourceType": "module"
     },
     "rules": {
-        "indent": ["error", 2],
+        "indent": ["error", 2, { "ignoredNodes": ["ConditionalExpression"] }],
         "linebreak-style": [
             "error",
             "unix"

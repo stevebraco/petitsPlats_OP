@@ -7,19 +7,18 @@ const inputs = document.querySelectorAll('.input-advanced');
 const containerIngredients = document.getElementById('container-ing');
 const containerAppareils = document.getElementById('container-app');
 const containerUstensils = document.getElementById('container-ust');
-const searchIngredients = document.querySelectorAll(
+const fieldSearchAdvanced = document.querySelectorAll(
   '.advanced-search__wrapper'
 );
-
 const containerAdvancedSearchList = document.querySelector(
   '.advanced-search__selected'
 );
 
 let inputId;
 
-const recipesFilter = (filterName) => {
+const recipesFilter = (arrFilterName) => {
   let arr;
-  if (filterName == 'ingrédients') {
+  if (arrFilterName == 'ingrédients') {
     arr = [
       ...new Set(
         recipes
@@ -29,11 +28,11 @@ const recipesFilter = (filterName) => {
     ];
   }
 
-  if (filterName == 'appareils') {
+  if (arrFilterName == 'appareils') {
     arr = [...new Set(recipes.map((t) => t.appliance.toLowerCase()))];
   }
 
-  if (filterName == 'ustensiles') {
+  if (arrFilterName == 'ustensiles') {
     arr = [
       ...new Set(
         recipes.map((t) => t.ustensils.map((u) => u.toLocaleLowerCase())).flat()
@@ -43,13 +42,13 @@ const recipesFilter = (filterName) => {
   return arr;
 };
 
-const displaydata = (arr) => {
+const suggestionsList = (arr) => {
   return arr
     .map((t) => `<p class='advanced-search__recipe'> ${t} </p>`)
     .join('');
 };
 
-const displayLilSearch = (arr) => {
+const buttonSearchList = (arr) => {
   return arr
     .map(
       (t) =>
@@ -58,7 +57,8 @@ const displayLilSearch = (arr) => {
     .join('');
 };
 
-const displaySearchAdvanced = (arr, container) => {
+// displaySuggestions by ingredients, appareils, ustensiles
+const displaySuggestions = (arr, container) => {
   const article = createElement(
     'article',
     ['advanced-search__article'],
@@ -66,45 +66,41 @@ const displaySearchAdvanced = (arr, container) => {
     container
   );
 
-  const model = displaydata(arr);
+  const model = suggestionsList(arr);
   createElement('div', ['advanced-search__list'], model, article);
 };
 
-// Display recipes
-displaySearchAdvanced(
+// displaySuggestions by ingredients, appareils, ustensiles
+displaySuggestions(
   recipesFilter('ingrédients').slice(0, 36),
   containerIngredients
 );
-displaySearchAdvanced(recipesFilter('appareils'), containerAppareils);
-displaySearchAdvanced(recipesFilter('ustensiles'), containerUstensils);
+displaySuggestions(recipesFilter('appareils'), containerAppareils);
+displaySuggestions(recipesFilter('ustensiles'), containerUstensils);
 
-let filterName;
+let arrFilterName = [];
 // Event
-for (let i = 0; i < searchIngredients.length; i++) {
+for (let i = 0; i < fieldSearchAdvanced.length; i++) {
   const article = document.querySelectorAll('.advanced-search__article');
   const list = document.querySelectorAll('.advanced-search__list');
 
-  searchIngredients[i].addEventListener('click', function (e) {
+  // Click on ingredients, appareils or ustensiles
+  fieldSearchAdvanced[i].addEventListener('click', function (e) {
     inputId = e.target.id;
+    // input name
+    let filterName = this.childNodes[1].name.toLowerCase();
 
     // array onClick
-    filterName = recipesFilter(this.childNodes[1].name.toLowerCase());
-
-    // let placeholder = searchIngredients[i].childNodes[1].name;
-    // e.target.placeholder = placeholder;
+    arrFilterName = recipesFilter(filterName);
 
     // classList
-    setClass(searchIngredients, 'remove', 'active');
+    setClass(fieldSearchAdvanced, 'remove', 'active');
     setClass(article, 'remove', 'show');
 
     let setClasses = !this.classList.contains('active');
 
     // if no active
     if (setClasses) {
-      // searchIngredients[
-      //   i
-      // ].childNodes[1].placeholder = `Rechercher un ${e.target.placeholder.toLowerCase()}`;
-
       this.classList.add('active');
       this.nextElementSibling.classList.add('show');
     }
@@ -112,16 +108,41 @@ for (let i = 0; i < searchIngredients.length; i++) {
 
   inputs[i].addEventListener('keyup', function (e) {
     let keyboard = e.target.value;
-    let suggestions = filterName;
+    let suggestions = [...arrFilterName];
+
     if (keyboard) {
-      suggestions = filterName.filter((data) => {
+      suggestions = arrFilterName.filter((data) => {
         return data.toLowerCase().includes(keyboard.toLowerCase());
       });
     }
 
-    list[i].innerHTML = displaydata(suggestions.slice(0, 36));
+    // Refresh the list
+    list[i].innerHTML = suggestionsList(suggestions.slice(0, 36));
   });
 }
+
+let searchListIng = [];
+let containerRecipe = document.querySelectorAll('.advanced-search__recipe');
+containerRecipe.forEach((element) => {
+  element.addEventListener('click', () => {
+    let value = element.textContent;
+    searchListIng.push({ value, inputId });
+    const list = buttonSearchList(searchListIng);
+    containerAdvancedSearchList.innerHTML = list;
+
+    // const btnSelected = document.querySelectorAll('.btn__selected');
+    // btnSelected.forEach((element) =>
+    //   element.addEventListener('click', function () {
+    //     console.log(element);
+    //     let test = searchListIng.filter(
+    //       (select) => select.value.trim() !== element.textContent.trim()
+    //     );
+    //     const list = buttonSearchList(test);
+    //     containerAdvancedSearchList.innerHTML = list;
+    //   })
+    // );
+  });
+});
 
 document.addEventListener('click', function (e) {
   const article = document.querySelectorAll('.advanced-search__article');
@@ -129,29 +150,7 @@ document.addEventListener('click', function (e) {
   if (e.target.className.includes('input-advanced')) {
     return;
   } else {
-    setClass(searchIngredients, 'remove', 'active');
+    setClass(fieldSearchAdvanced, 'remove', 'active');
     setClass(article, 'remove', 'show');
   }
-});
-
-let searchListIng = [];
-
-let containerRecipe = document.querySelectorAll('.advanced-search__recipe');
-containerRecipe.forEach((element) => {
-  element.addEventListener('click', () => {
-    let value = element.textContent;
-    searchListIng.push({ value, inputId });
-    const list = displayLilSearch(searchListIng);
-    containerAdvancedSearchList.innerHTML = list;
-
-    // btnSelected.forEach((element) =>
-    //   element.addEventListener('click', function () {
-    //     let test = searchListIng.filter(
-    //       (select) => select.value.trim() !== element.textContent.trim()
-    //     );
-    //     const list = displayLilSearch(test);
-    //     containerAdvancedSearchList.innerHTML = list;
-    //   })
-    // );
-  });
 });
