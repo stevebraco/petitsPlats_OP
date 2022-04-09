@@ -153,6 +153,23 @@ button {
   gap: 2rem;
   flex-direction: column;
 }
+.advanced-search__container-inputs {
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+}
+.advanced-search__container {
+  position: relative;
+}
+.advanced-search__container:nth-child(1) article {
+  background: #3282F7;
+}
+.advanced-search__container:nth-child(2) article {
+  background: #68D9A4;
+}
+.advanced-search__container:nth-child(3) article {
+  background: #ED6454;
+}
 .advanced-search__wrapper {
   position: relative;
 }
@@ -161,18 +178,10 @@ button {
   font-weight: 700;
   font-size: 18px;
 }
-.advanced-search__container {
-  position: relative;
-}
 .advanced-search__selected {
   padding: 2.5rem 0 1.5rem;
   display: flex;
   gap: 1rem;
-}
-.advanced-search__container-inputs {
-  display: flex;
-  gap: 2rem;
-  padding-bottom: 2.5rem;
 }
 .advanced-search__wrapper.active {
   position: relative;
@@ -208,8 +217,10 @@ button {
   position: absolute;
   top: 5rem;
   width: 667px;
-  background-color: #3282F7;
   border-radius: 5px;
+}
+.advanced-search__article:nth-child(1) {
+  background: red;
 }
 .advanced-search__article.show {
   display: block;
@@ -217,7 +228,7 @@ button {
 .advanced-search__list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
+  grid-gap: 10px;
   font-weight: 400;
   font-size: 1.8rem;
   color: #ffffff;
@@ -228,18 +239,19 @@ button {
 
 .cards__container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-gap: 5rem;
 }
 
 .card {
-  max-width: 380px;
   margin-bottom: 15px;
 }
 .card__figure {
   width: 100%;
   height: 178px;
   background-color: #c7bebe;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .card__info {
   display: flex;
@@ -253,13 +265,28 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 12px;
+  line-height: 100%;
 }
 .card__content {
   background-color: #E7E7E7;
   padding: 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .card__recette {
   padding: 12px;
+}
+.card__min {
+  font-size: 18px;
+  font-weight: 700;
+}
+.card__ingredients {
+  width: 900px;
+}
+.card__ingredient {
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /*# sourceMappingURL=styles.css.map */

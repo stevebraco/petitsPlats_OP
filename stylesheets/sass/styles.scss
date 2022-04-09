@@ -82,6 +82,27 @@ button {
   gap: 2rem;
   flex-direction: column;
 
+  &__container-inputs {
+    display: flex;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  &__container {
+    position: relative;
+    &:nth-child(1) article {
+      background: $blue;
+    }
+
+    &:nth-child(2) article {
+      background: $green;
+    }
+
+    &:nth-child(3) article {
+      background: $red;
+    }
+  }
+
   &__wrapper {
     position: relative;
     // width: 170px;
@@ -92,19 +113,10 @@ button {
     }
   }
 
-  &__container {
-    position: relative;
-  }
-
   &__selected {
     padding: 2.5rem 0 1.5rem;
     display: flex;
     gap: 1rem;
-  }
-  &__container-inputs {
-    display: flex;
-    gap: 2rem;
-    padding-bottom: 2.5rem;
   }
 
   &__wrapper.active {
@@ -135,17 +147,21 @@ button {
     position: absolute;
     top: 5rem;
     width: 667px;
-    background-color: $blue;
     border-radius: $border-radius;
+
+    &:nth-child(1) {
+      background: red;
+    }
   }
   &__article.show {
     display: block;
+    // background: $blue;
   }
 
   &__list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: 10px;
     font-weight: 400;
     font-size: 1.8rem;
     color: #ffffff;
@@ -161,19 +177,21 @@ button {
 .cards {
   &__container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-gap: 5rem;
   }
 }
 
 .card {
-  max-width: 380px;
+  // max-width: 380px;
   margin-bottom: 15px;
 
   &__figure {
     width: 100%;
     height: 178px;
     background-color: #c7bebe;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
 
   &__info {
@@ -190,14 +208,35 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 12px;
+    line-height: 100%;
   }
 
   &__content {
     background-color: $light-gray;
     padding: 20px;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
   }
 
   &__recette {
     padding: 12px;
+  }
+
+  &__min {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__ingredients {
+    width: 900px;
+  }
+
+  &__ingredient {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__info {
   }
 }
