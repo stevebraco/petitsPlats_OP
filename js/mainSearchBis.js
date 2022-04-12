@@ -5,52 +5,30 @@ import { createElement } from './utils/createElement.js';
 const inputMainSearch = document.getElementById('main-search');
 const cardsContainer = document.querySelector('.cards__container');
 export let resultList = [...recipes];
+
 function resultMainSearch(searchValue) {
   let result = [];
   for (let i = 0; i < recipes.length; i++) {
-    let isIncludesName = recipes[i].name.toLowerCase().includes('Limonade');
-    console.log(isIncludesName);
-    if (isIncludesName) {
-      result.push(recipes[i].name);
+    let ingredients = recipes[i].ingredients;
+    if (recipes[i].name.toLowerCase().includes(searchValue)) {
+      result.push(recipes[i]);
+      break;
+    }
+
+    if (recipes[i].description.toLowerCase().includes(searchValue)) {
+      result.push(recipes[i]);
+      break;
+    }
+
+    for (let j = 0; j < ingredients.length; j++) {
+      if (ingredients[j].ingredient.toLowerCase().includes(searchValue)) {
+        result.push(recipes[i]);
+        break;
+      }
     }
   }
-  // for (const recipe of recipes) {
-  //   const { name, description, ingredients } = recipe;
-  //   let isIncludesName = name.toLowerCase().includes(searchValue);
-  //   let isIncludesDescription = description.toLowerCase().includes(searchValue);
-
-  //   for (const element of ingredients) {
-  //     isIncludesIngredients = element.ingredient
-  //       .toLowerCase()
-  //       .includes(searchValue);
-  //   }
-  //   if (isIncludesName || isIncludesDescription || isIncludesIngredients) {
-  //     result.push(recipe);
-  //   }
-  // }
-  console.log(result);
   return result;
 }
-
-// function resultMainSearch(searchValue) {
-//   let result = [];
-//   let isIncludesIngredients;
-//   for (const recipe of recipes) {
-//     const { name, description, ingredients } = recipe;
-//     let isIncludesName = name.toLowerCase().includes(searchValue);
-//     let isIncludesDescription = description.toLowerCase().includes(searchValue);
-
-//     for (const element of ingredients) {
-//       isIncludesIngredients = element.ingredient
-//         .toLowerCase()
-//         .includes(searchValue);
-//     }
-//     if (isIncludesName || isIncludesDescription || isIncludesIngredients) {
-//       result.push(recipe);
-//     }
-//   }
-//   return result;
-// }
 
 // Tape dans la barre de recherche
 inputMainSearch.addEventListener('input', (e) => {

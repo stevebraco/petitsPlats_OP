@@ -5,9 +5,9 @@ export const setClass = (els, fnName, className) => {
 };
 
 export function showHide(fieldSearchAdvanced, article, element) {
+  console.dir(element.firstElementChild.id);
   setClass(fieldSearchAdvanced, 'remove', 'active');
   setClass(article, 'remove', 'show');
-
   let setClasses = !element.classList.contains('active');
 
   // if no active

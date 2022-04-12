@@ -1,6 +1,4 @@
-import { recipes } from '../data/recipes.js';
-import { createElement } from './utils/createElement.js';
-import { onClickOutside, setClass, showHide } from './utils/utils.js';
+import { onClickOutside, showHide } from './utils/utils.js';
 import { resultList } from './mainSearchBis.js';
 
 const inputs = document.querySelectorAll('.input-advanced');
@@ -13,14 +11,12 @@ const containerAdvancedSearchList = document.querySelector(
   '.advanced-search__selected'
 );
 
-let inputId;
 let arrFilterName = [];
-let searchListIng = [];
 
-const selectRecipesFilter = (arrFilterName, array = recipes) => {
+const selectRecipesFilter = (arrFilterName, array = resultList) => {
   let arr = [];
 
-  if (arrFilterName === 'ingrédients') {
+  if (arrFilterName === 'ingredients') {
     arr = array
       ?.map((element) =>
         element.ingredients.map((i) => i.ingredient.toLowerCase())
@@ -51,57 +47,35 @@ const displayRecipesAdvanced = (ingredient, container) => {
 
   container.innerHTML = model;
 };
-
-const buttonSearchList = (arr) => {
-  return arr
-    .map(
-      (t) =>
-        `<button type='button' class='btn__selected btn__${t.inputId}'> <span>${t.value}</span> <img src='./images/icon-close.svg' />  </button>`
-    )
-    .join('');
-};
-
 // Event
 for (let i = 0; i < fieldSearchAdvanced.length; i++) {
   // Click on ingredients, appareils or ustensiles
-  fieldSearchAdvanced[i].addEventListener('click', function (e) {
+  fieldSearchAdvanced[i].addEventListener('click', function () {
     advancedSearchList[i].innerHTML = '';
 
     let filterName = this.childNodes[1].name.toLowerCase();
 
-    let arrayRecipesFilter = selectRecipesFilter(filterName, resultList);
+    let arrayRecipesFilter = selectRecipesFilter(filterName);
 
     displayRecipesAdvanced(arrayRecipesFilter, advancedSearchList[i]);
 
     arrFilterName = [...arrayRecipesFilter];
-    inputId = e.target.id;
 
     showHide(fieldSearchAdvanced, article, this);
 
+    console.log(fieldSearchAdvanced);
+    if (this.classList.contains('active')) {
+      console.log('isActive');
+      inputs[i].placeholder = 'recherche';
+    } else {
+      console.log('not active');
+      inputs[i].placeholder = 'nope';
+    }
+
     let containerRecipe = document.querySelectorAll('.advanced-search__recipe');
-    containerRecipe?.forEach((element) => {
-      element.addEventListener('click', () => {
-        let value = element.textContent;
-        searchListIng.push({ value, inputId });
-        console.log(searchListIng);
-        const list = buttonSearchList(searchListIng);
-        containerAdvancedSearchList.innerHTML = list;
 
-        // const btnSelected = document.querySelectorAll('.btn__selected');
-        // btnSelected.forEach((element) =>
-        //   element.addEventListener('click', function () {
-        //     let remove = searchListIng.filter(
-        //       (select) => select.value.trim() !== element.textContent.trim()
-        //     );
-        //     searchListIng = [...remove];
-        //     console.log(searchListIng);
-        //     let list = buttonSearchList(searchListIng);
-        //     containerAdvancedSearchList.innerHTML = '';
-        //     containerAdvancedSearchList.innerHTML = list;
-
-        //   })
-        // );
-      });
+    containerRecipe?.forEach((t) => {
+      t.addEventListener('click', onClickElement);
     });
   });
 
@@ -113,33 +87,36 @@ for (let i = 0; i < fieldSearchAdvanced.length; i++) {
       suggestions = arrFilterName.filter((data) => {
         return data.toLowerCase().includes(keyboard.toLowerCase());
       });
-      console.log(suggestions);
     }
 
     displayRecipesAdvanced(suggestions, advancedSearchList[i]);
-
     let containerRecipe = document.querySelectorAll('.advanced-search__recipe');
-    containerRecipe?.forEach((element) => {
-      element.addEventListener('click', () => {
-        let value = element.textContent;
-        searchListIng.push({ value, inputId });
-        const list = buttonSearchList(searchListIng);
-        containerAdvancedSearchList.innerHTML = list;
-
-        // const btnSelected = document.querySelectorAll('.btn__selected');
-        // btnSelected.forEach((element) =>
-        //   element.addEventListener('click', function () {
-        //     console.log(element);
-        //     let test = searchListIng.filter(
-        //       (select) => select.value.trim() !== element.textContent.trim()
-        //     );
-        //     const list = buttonSearchList(test);
-        //     containerAdvancedSearchList.innerHTML = list;
-        //   })
-        // );
+    containerRecipe?.forEach((t) => {
+      t.addEventListener('click', (e) => {
+        onClickElement(e);
       });
     });
   });
+}
+
+function onClickElement(e) {
+  let value = e.target.textContent;
+  let colorClass = e.target.parentElement.id;
+
+  const element = document.createElement('div');
+  element.classList.add('grocery-item');
+  element.innerHTML = `<button class="btn__selected btn__${colorClass} ">${value}</button>`;
+
+  const btnSelected = element.querySelector('.btn__selected');
+
+  btnSelected.addEventListener('click', deleteFilterButton);
+
+  containerAdvancedSearchList.appendChild(element);
+}
+
+function deleteFilterButton(e) {
+  const element = e.currentTarget.parentElement;
+  containerAdvancedSearchList.removeChild(element);
 }
 
 document.addEventListener('click', (e) =>
