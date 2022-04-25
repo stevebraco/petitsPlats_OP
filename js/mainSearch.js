@@ -206,7 +206,6 @@ const addTag = (e) => {
 
   buttonSelected.push(value);
 
-  // const model = `<button class="btn__selected btn__${colorClass}">${value}</button>`;
   const model = `<button class="btn__selected btn__${colorClass}"><span class='btn__value'>${value}</span><img class='icon-close' src='./images/icon-close.svg'/> </button>`;
   const element = createElement(
     'div',
@@ -215,7 +214,6 @@ const addTag = (e) => {
     null
   );
 
-  const btnSelected = element.querySelector('.btn__selected');
   const btnValue = element.querySelector('.btn__value');
   const btnClose = element.querySelector('.icon-close');
   containerAdvancedSearchList.appendChild(element);
@@ -231,8 +229,6 @@ const addTag = (e) => {
   } else {
     refreshCard(dataFilter);
   }
-
-  console.log(tags);
 
   btnClose.addEventListener('click', deleteFilterButton);
 };
@@ -290,5 +286,4 @@ const deleteFilterButton = (e) => {
     searchResult = [...resultMainSearch(dataFilter, inputSearchValue)];
     refreshCard(searchResult);
   }
-  console.log(tags);
 };
