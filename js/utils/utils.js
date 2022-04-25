@@ -37,15 +37,12 @@ export function onClickOutside(e, fieldSearchAdvanced, article) {
 
 export const filterButtonSearchAdvanced = (array, name, value) => {
   if (name === 'appareils') {
-    console.log('appareils');
     array = array.filter((result) => {
       return result.appliance.toLowerCase().includes(value.toLowerCase());
     });
   }
 
   if (name === 'ingredients') {
-    console.log('ingredients');
-
     array = array.filter((recipe) =>
       recipe.ingredients.find((t) =>
         t.ingredient.toLowerCase().includes(value.toLowerCase())
@@ -54,8 +51,6 @@ export const filterButtonSearchAdvanced = (array, name, value) => {
   }
 
   if (name === 'ustensiles') {
-    console.log('ustensiles');
-
     array = array
       .filter((element) =>
         element.ustensils.find((ustensil) =>
@@ -98,7 +93,6 @@ export const buttonDisabled = (array, index) => {
   let tag = document.querySelectorAll('.advanced-search__tag');
 
   if (article[index].classList.contains('show')) {
-    console.log('show');
     if (btnSelectedAll.length > 0) {
       [...tag].some((r) => {
         if (array.includes(r.textContent)) {
@@ -110,7 +104,6 @@ export const buttonDisabled = (array, index) => {
 };
 
 export const refreshCardTags = (array, tags) => {
-  console.log(tags.tagAppliance);
   let result = [];
   array.filter((recipe) => {
     let ingredients = tags.tagIngredient?.every((tag) =>

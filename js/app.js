@@ -3,7 +3,7 @@ import {
   displayRecipes,
   mainInputSearch,
   searchAdvanced,
-} from './mainSearchBis.js';
+} from './mainSearch.js';
 import { onClickOutside } from './utils/utils.js';
 
 const inputMainSearch = document.getElementById('main-search');
@@ -14,16 +14,17 @@ const article = document.querySelectorAll('.advanced-search__article');
 
 // Launch App
 const App = () => {
-  // Tape dans la barre de recherche
-
+  // uUer interaction input
   inputMainSearch.addEventListener('input', mainInputSearch);
 
+  // TAGS
   searchAdvanced();
 
   document.addEventListener('click', (e) =>
     onClickOutside(e, fieldSearchAdvanced, article)
   );
 
+  // Show Recipes
   displayRecipes(recipes);
 };
 
