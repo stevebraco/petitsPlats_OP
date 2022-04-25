@@ -13,6 +13,10 @@ input {
   border-radius: $border-radius;
   border: none;
   outline: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+  font-family: $fonts;
 }
 button {
   border: none;
@@ -33,13 +37,17 @@ button {
     font-size: 14px;
     text-transform: capitalize;
   }
-  &__ingredients {
+  &__disabled {
+    color: #666666;
+    pointer-events: none;
+  }
+  &__ingredient {
     background: $blue;
   }
-  &__appareils {
+  &__appliance {
     background: $green;
   }
-  &__ustensiles {
+  &__ustensils {
     background: $red;
   }
 }
@@ -52,8 +60,7 @@ button {
   flex-direction: column;
   gap: 1.7rem;
   padding-top: 4.2rem;
-  &__logo {
-  }
+
   &__container-input {
     position: relative;
     width: 100%;
@@ -63,6 +70,7 @@ button {
     height: 69px;
     padding-left: 2.4rem;
     background-color: $light-gray;
+    color: #000000;
   }
   ::placeholder {
     color: rgba($color: #000000, $alpha: 0.25);
@@ -125,6 +133,16 @@ button {
     // height: 397px;
     // background-color: $blue;
   }
+  &__wraper-tag-ingredient {
+    background-color: $blue;
+  }
+
+  &__wraper-tag-appliance {
+    background: $green;
+  }
+  &__wraper-tag-ustensils {
+    background: $red;
+  }
   &__input-i {
     @include inputSearch($blue);
   }
@@ -143,7 +161,7 @@ button {
 
   &__article {
     display: none;
-    padding: 4rem 1.9rem 4rem 2.6rem;
+    padding: 4rem 1.9rem;
     position: absolute;
     top: 5rem;
     width: 667px;
@@ -167,8 +185,15 @@ button {
     color: #ffffff;
   }
 
-  &__recipe {
+  &__tag {
+    background: transparent;
+    text-align: left;
     text-transform: capitalize;
+    cursor: pointer;
+    padding: 3px 0px 3px 5px;
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
   }
 }
 
@@ -185,6 +210,9 @@ button {
 .card {
   // max-width: 380px;
   margin-bottom: 15px;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  background-color: $light-gray;
 
   &__figure {
     width: 100%;
@@ -202,6 +230,7 @@ button {
 
   &__title {
     font-size: 18px;
+    max-width: 23rem;
   }
 
   &__description {
@@ -213,19 +242,19 @@ button {
   }
 
   &__content {
-    background-color: $light-gray;
     padding: 20px;
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+
+    // min-height: 220px;
   }
 
   &__recette {
-    padding: 12px;
+    padding: 11px;
   }
 
   &__min {
     font-size: 18px;
     font-weight: 700;
+    vertical-align: bottom;
   }
 
   &__ingredients {
@@ -233,10 +262,56 @@ button {
   }
 
   &__ingredient {
-    font-size: 12px;
+    font-size: 11 px;
     font-weight: 700;
   }
+}
 
-  &__info {
+@media screen and (max-width: 1280px) {
+  .cards {
+    &__container {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-gap: 5rem;
+    }
+  }
+
+  .advanced-search__container-inputs {
+    flex-direction: column;
+  }
+
+  .advanced-search__article {
+    position: initial;
+    width: 100%;
+  }
+
+  .advanced-search__wrapper.active {
+    width: 100%;
+    transform: translateY(10px);
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .cards {
+    &__container {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      grid-gap: 5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    padding: 0 1rem;
+  }
+  .advanced-search {
+    display: none;
+  }
+  .cards__container {
+    grid-gap: 0rem;
+  }
+  .card {
+    margin-top: 20px;
   }
 }

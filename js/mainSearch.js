@@ -47,7 +47,7 @@ const displayIngredients = (arr) => {
 };
 
 // Affichage des recettes
-const displayRecipes = (recipes) => {
+export const displayRecipes = (recipes) => {
   const recipesList = recipes
     .map((recipe) => {
       const { ingredients } = recipe;
