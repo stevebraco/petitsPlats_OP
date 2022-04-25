@@ -266,7 +266,10 @@ const deleteFilterButton = (e) => {
   containerAdvancedSearchList.removeChild(element);
   let typeToRemove = element.children[0].classList[1].split('__')[1];
 
-  buttonSelected = buttonSelected.filter((t) => t !== element.textContent);
+  buttonSelected = buttonSelected.filter(
+    (t) => t !== element.textContent.trim()
+  );
+  console.log(buttonSelected);
   tagsToRemove(e.target.previousSibling.textContent, typeToRemove);
 
   dataFilter = UpdateCardByTags(recipes);
