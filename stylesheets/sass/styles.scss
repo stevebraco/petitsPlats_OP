@@ -98,15 +98,15 @@ button {
 
   &__container {
     position: relative;
-    &:nth-child(1) article {
+    &:nth-child(1) .advanced-search__article {
       background: $blue;
     }
 
-    &:nth-child(2) article {
+    &:nth-child(2) .advanced-search__article {
       background: $green;
     }
 
-    &:nth-child(3) article {
+    &:nth-child(3) .advanced-search__article {
       background: $red;
     }
   }
