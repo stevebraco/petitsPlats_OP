@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -18,7 +18,7 @@
     </div>
   </header>
   <main>
-    <section class="advanced-search">
+    <div class="advanced-search">
       <div class="advanced-search__selected">
 
       </div>
@@ -27,51 +27,47 @@
         <div class="advanced-search__container">
           <div class="advanced-search__wrapper">
             <input class="input-advanced advanced-search__input-i" placeholder="Ingredients" name='Ingredients'
-              id="ingredient" type="text" data-name="ingrédient">
+              type="text" data-name="ingrédient">
             <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
           </div>
-          <article class="advanced-search__article">
+          <div class="advanced-search__article">
             <div class="advanced-search__list" id='ingredient'></div>
-          </article>
+          </div>
         </div>
 
         <!-- INPUT APPAREILS -->
         <div class="advanced-search__container">
           <div class="advanced-search__wrapper">
             <input class="input-advanced advanced-search__input-a" placeholder="Appareils" name='Appareils' type="text"
-              id="appliance" data-name="appareil">
+              data-name="appareil">
             <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
           </div>
-          <article class="advanced-search__article">
+          <div class="advanced-search__article">
             <div class="advanced-search__list" id='appliance'></div>
-          </article>
+          </div>
         </div>
 
         <!-- INPUT USTENSILES -->
         <div class="advanced-search__container">
           <div class="advanced-search__wrapper">
             <input class="input-advanced advanced-search__input-u" placeholder="Ustensiles" name="Ustensiles"
-              type="text" id='ustensiles' data-name="ustensile" id='ustensils'>
+              type="text" id='ustensiles' data-name="ustensile">
             <img src="./images/arrow-down.svg" alt="arrow down" class="advanced-search__arrow-down">
           </div>
-          <article class="advanced-search__article">
+          <div class="advanced-search__article">
             <div class="advanced-search__list" id="ustensils"></div>
-          </article>
+          </div>
         </div>
 
       </div>
-    </section>
-    <button id='save'>save</button>
-    <section class="cards">
+    </div>
+    <div class="cards">
       <div class="cards__container">
-
       </div>
-    </section>
+    </div>
   </main>
+  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/mainSearch.js"></script>
 </body>
-<script type="module" src="./js/app.js"></script>
-<script type="module" src="./js/mainSearchBis.js"></script>
-<script type="module" src="./js/factory/recipesFactory.js"></script>
-<!-- <script type="module" src="./js/searchAdvanced.js"></script> -->
 
 </html>
