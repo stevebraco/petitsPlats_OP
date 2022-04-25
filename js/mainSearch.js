@@ -228,7 +228,7 @@ const addTag = (e) => {
 
   tagsToAdd(btnSelected.textContent, colorClass);
 
-  dataFilter = UpdateCardByTags(dataFilter);
+  dataFilter = updateCardByTags(dataFilter);
   searchResult = [...dataFilter];
 
   if (inputSearchValue) {
@@ -246,7 +246,7 @@ const tagsToRemove = (elementToRemove, type) =>
 
 const tagsToAdd = (element, type) => tags[type].push(element);
 
-function UpdateCardByTags(array) {
+function updateCardByTags(array) {
   let result = [];
   array.filter((recipe) => {
     let ingredients = tags['ingredient'].every((tag) =>
@@ -277,7 +277,7 @@ const deleteFilterButton = (e) => {
   buttonSelected = buttonSelected.filter((t) => t !== element.textContent);
   tagsToRemove(e.target.textContent, typeToRemove);
 
-  dataFilter = UpdateCardByTags(recipes);
+  dataFilter = updateCardByTags(recipes);
   searchResult = [...dataFilter];
 
   // no value
