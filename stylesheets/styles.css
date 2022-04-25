@@ -102,6 +102,10 @@ button {
   display: inline-block;
 }
 
+.icon-close {
+  cursor: pointer;
+}
+
 .btn__selected {
   display: flex;
   align-items: center;
