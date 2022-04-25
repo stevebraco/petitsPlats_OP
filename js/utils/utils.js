@@ -97,6 +97,8 @@ export const buttonDisabled = (array, index) => {
       [...tag].some((r) => {
         if (array.includes(r.textContent)) {
           r.classList.add('btn__disabled');
+        } else {
+          r.classList.remove('btn__disabled');
         }
       });
     }

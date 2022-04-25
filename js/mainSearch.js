@@ -206,7 +206,8 @@ const addTag = (e) => {
 
   buttonSelected.push(value);
 
-  const model = `<button class="btn__selected btn__${colorClass}">${value}</button>`;
+  // const model = `<button class="btn__selected btn__${colorClass}">${value}</button>`;
+  const model = `<button class="btn__selected btn__${colorClass}"><span class='btn__value'>${value}</span><img class='icon-close' src='./images/icon-close.svg'/> </button>`;
   const element = createElement(
     'div',
     ['advanced-search__wrapper-tag'],
@@ -215,9 +216,11 @@ const addTag = (e) => {
   );
 
   const btnSelected = element.querySelector('.btn__selected');
+  const btnValue = element.querySelector('.btn__value');
+  const btnClose = element.querySelector('.icon-close');
   containerAdvancedSearchList.appendChild(element);
 
-  tagsToAdd(btnSelected.textContent, colorClass);
+  tagsToAdd(btnValue.textContent, colorClass);
 
   dataFilter = UpdateCardByTags(dataFilter);
   searchResult = [...dataFilter];
@@ -229,7 +232,9 @@ const addTag = (e) => {
     refreshCard(dataFilter);
   }
 
-  btnSelected.addEventListener('click', deleteFilterButton);
+  console.log(tags);
+
+  btnClose.addEventListener('click', deleteFilterButton);
 };
 
 const tagsToRemove = (elementToRemove, type) =>
@@ -260,13 +265,13 @@ function UpdateCardByTags(array) {
 
 const deleteFilterButton = (e) => {
   const btnSelectedAll = document.querySelectorAll('.btn__selected');
-  const element = e.currentTarget.parentElement;
+  const element = e.currentTarget.parentElement.parentElement;
 
   containerAdvancedSearchList.removeChild(element);
   let typeToRemove = element.children[0].classList[1].split('__')[1];
 
   buttonSelected = buttonSelected.filter((t) => t !== element.textContent);
-  tagsToRemove(e.target.textContent, typeToRemove);
+  tagsToRemove(e.target.previousSibling.textContent, typeToRemove);
 
   dataFilter = UpdateCardByTags(recipes);
   searchResult = [...dataFilter];
@@ -285,4 +290,5 @@ const deleteFilterButton = (e) => {
     searchResult = [...resultMainSearch(dataFilter, inputSearchValue)];
     refreshCard(searchResult);
   }
+  console.log(tags);
 };
