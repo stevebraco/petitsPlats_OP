@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap');
 html,
 body,
 p,
@@ -82,7 +82,7 @@ body {
   max-width: 1370px;
   margin: 0 auto;
   padding: 0 7rem;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 input {
@@ -92,7 +92,7 @@ input {
   font-weight: 700;
   font-size: 18px;
   color: #ffffff;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 button {
@@ -117,13 +117,13 @@ button {
   pointer-events: none;
 }
 .btn__ingredient {
-  background: #3282F7;
+  background: #3282f7;
 }
 .btn__appliance {
-  background: #68D9A4;
+  background: #68d9a4;
 }
 .btn__ustensils {
-  background: #ED6454;
+  background: #ed6454;
 }
 
 .header {
@@ -142,7 +142,7 @@ button {
   width: 100%;
   height: 69px;
   padding-left: 2.4rem;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
   color: #000000;
 }
 .header ::placeholder {
@@ -171,13 +171,13 @@ button {
   position: relative;
 }
 .advanced-search__container:nth-child(1) .advanced-search__article {
-  background: #3282F7;
+  background: #3282f7;
 }
 .advanced-search__container:nth-child(2) .advanced-search__article {
-  background: #68D9A4;
+  background: #68d9a4;
 }
 .advanced-search__container:nth-child(3) .advanced-search__article {
-  background: #ED6454;
+  background: #ed6454;
 }
 .advanced-search__wrapper {
   position: relative;
@@ -197,28 +197,28 @@ button {
   width: 667px;
 }
 .advanced-search__wraper-tag-ingredient {
-  background-color: #3282F7;
+  background-color: #3282f7;
 }
 .advanced-search__wraper-tag-appliance {
-  background: #68D9A4;
+  background: #68d9a4;
 }
 .advanced-search__wraper-tag-ustensils {
-  background: #ED6454;
+  background: #ed6454;
 }
 .advanced-search__input-i {
-  background: #3282F7;
+  background: #3282f7;
   height: 69px;
   padding-left: 1.5rem;
   width: 100%;
 }
 .advanced-search__input-a {
-  background: #68D9A4;
+  background: #68d9a4;
   height: 69px;
   padding-left: 1.5rem;
   width: 100%;
 }
 .advanced-search__input-u {
-  background: #ED6454;
+  background: #ed6454;
   height: 69px;
   padding-left: 1.5rem;
   width: 100%;
@@ -272,7 +272,7 @@ button {
   margin-bottom: 15px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
 }
 .card__figure {
   width: 100%;
@@ -312,7 +312,7 @@ button {
   width: 900px;
 }
 .card__ingredient {
-  font-size: 11 px;
+  font-size: 11px;
   font-weight: 700;
 }
 

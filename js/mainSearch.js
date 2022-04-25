@@ -58,6 +58,7 @@ function resultMainSearch(array, inputSearchValue) {
   }
   return result;
 }
+
 /**
  * @param  {} e, interaction with the keyboard
  * user interaction with the keyboard
@@ -67,8 +68,6 @@ export function mainInputSearch(e) {
   inputSearchValue = e.target.value.toLowerCase();
 
   if (inputSearchValue.length > 2) {
-    const t0 = performance.now();
-
     const btnSelectedAll = document.querySelectorAll('.btn__selected');
 
     cardsContainer.innerHTML = '';
@@ -99,14 +98,11 @@ export function mainInputSearch(e) {
         'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson »'
       );
     }
-    const t1 = performance.now();
-    console.log(
-      `Call to doSomething took ${(t1 - t0).toFixed(2)} milliseconds.`
-    );
   } else {
     refreshCard(dataFilter);
   }
 }
+
 /**
  * @param  {} message
  * return a message
@@ -121,6 +117,7 @@ const refreshCard = (array) => {
   cardsContainer.innerHTML = '';
   displayRecipes(array);
 };
+
 /**
  * @param  {} recipes, array
  * Display Recipes
@@ -134,6 +131,7 @@ export const displayRecipes = (recipes) => {
     cardsContainer.appendChild(article);
   });
 };
+
 /**
  * @param  {} array
  * @param  {} container
@@ -149,6 +147,7 @@ const displayTags = (array, container) => {
   container.innerHTML = '';
   container.innerHTML = model;
 };
+
 /**
  * @param  {} e, reprensents value user
  * @param  {} i, represents a index
