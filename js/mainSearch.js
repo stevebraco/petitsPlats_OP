@@ -32,9 +32,6 @@ let tags = {
 
 /**
  * Represents the result of the research
- * @param  {string[]} array - recipe array
- * @param  {string} inputSearchValue = user interaction with the keyboard
- * Return a array
  */
 function resultMainSearch(array, inputSearchValue) {
   let result = [];
@@ -86,6 +83,7 @@ export function mainInputSearch(e) {
 
         refreshCard(searchResult);
       } else {
+        console.log('la');
         dataFilter = [...recipes];
         searchResult = [...resultMainSearch(dataFilter, inputSearchValue)];
         refreshCard(searchResult);
@@ -105,7 +103,6 @@ export function mainInputSearch(e) {
 
 /**
  * Reprensents a message to display if the recipe array is empty
- * @param  {string} message
  */
 const displayMessageNoResult = (message) =>
   (cardsContainer.innerHTML = message);
@@ -121,7 +118,6 @@ const refreshCard = (array) => {
 
 /**
  * Represents recipes display
- * @param  {string[]} recipes, array
  */
 export const displayRecipes = (recipes) => {
   const searchResult = [...recipes];
@@ -135,8 +131,6 @@ export const displayRecipes = (recipes) => {
 
 /**
  * Represents Display Tags
- * @param  {string[]} array
- * @param  {HTMLElement} container
  */
 const displayTags = (array, container) => {
   const model = array
@@ -150,8 +144,8 @@ const displayTags = (array, container) => {
 };
 
 /**
- * @param  {} e, reprensents value user
- * @param  {} i, represents a index
+ * reprensents value user
+ * represents a index
  */
 const searchByTypeTags = (e, i) => {
   let keyboard = e.target.value;
@@ -209,6 +203,7 @@ export const searchAdvanced = () => {
     inputs[i].addEventListener('keyup', (e) => searchByTypeTags(e, i));
   }
 };
+
 /**
  * Add a tag
  */
@@ -242,27 +237,39 @@ const addTag = (e) => {
     refreshCard(dataFilter);
   }
 
-  btnClose.addEventListener('click', deleteFilterButton);
+  btnClose.addEventListener('click', (e) => {
+    deleteFilterButton(e);
+    const btnSelectedAll = document.querySelectorAll('.btn__selected');
+    // no value
+    if (!inputSearchValue) refreshCard(dataFilter);
+
+    if (!inputSearchValue && !btnSelectedAll.length) {
+      dataFilter = [...recipes];
+      refreshCard(dataFilter);
+    }
+
+    if (!btnSelectedAll.length && inputSearchValue) {
+      isWritten = true;
+      dataFilter = [...recipes];
+      searchResult = [...resultMainSearch(dataFilter, inputSearchValue)];
+      refreshCard(searchResult);
+    }
+  });
 };
 
 /**
  * Remove a tag
- * @param  {string} elementToRemove
- * @param  {string} type
  */
 const tagsToRemove = (elementToRemove, type) =>
   (tags[type] = tags[type].filter((tag) => tag !== elementToRemove));
 
 /**
  * Add tags
- * @param  {string} element
- * @param  {string} type
  */
 const tagsToAdd = (element, type) => tags[type].push(element);
 
 /**
  * Update card
- * @param  {string[]} array
  */
 function updateCardByTags(array) {
   let result = [];
@@ -284,11 +291,11 @@ function updateCardByTags(array) {
   });
   return result;
 }
+
 /**
  * Delete a filter button
  */
 const deleteFilterButton = (e) => {
-  const btnSelectedAll = document.querySelectorAll('.btn__selected');
   const element = e.currentTarget.parentElement.parentElement;
 
   containerAdvancedSearchList.removeChild(element);
@@ -297,24 +304,9 @@ const deleteFilterButton = (e) => {
   buttonSelected = buttonSelected.filter(
     (t) => t !== element.textContent.trim()
   );
-  console.log(buttonSelected);
+
   tagsToRemove(e.target.previousSibling.textContent, typeToRemove);
 
   dataFilter = updateCardByTags(recipes);
   searchResult = [...dataFilter];
-
-  // no value
-  if (!inputSearchValue) refreshCard(dataFilter);
-
-  if (!inputSearchValue && !btnSelectedAll.length) {
-    dataFilter = [...recipes];
-    refreshCard(dataFilter);
-  }
-
-  if (!btnSelectedAll.length && inputSearchValue) {
-    isWritten = true;
-    dataFilter = [...recipes];
-    searchResult = [...resultMainSearch(dataFilter, inputSearchValue)];
-    refreshCard(searchResult);
-  }
 };
