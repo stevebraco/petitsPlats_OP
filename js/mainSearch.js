@@ -31,8 +31,9 @@ let tags = {
 };
 
 /**
- * @param  {} array
- * @param  {} inputSearchValue, user interaction with the keyboard
+ * Represents the result of the research
+ * @param  {string[]} array - recipe array
+ * @param  {string} inputSearchValue = user interaction with the keyboard
  * Return a array
  */
 function resultMainSearch(array, inputSearchValue) {
@@ -60,9 +61,8 @@ function resultMainSearch(array, inputSearchValue) {
 }
 
 /**
- * @param  {} e, interaction with the keyboard
+ * Represents the recipe cards displayed
  * user interaction with the keyboard
- * Display the recipes
  */
 export function mainInputSearch(e) {
   inputSearchValue = e.target.value.toLowerCase();
@@ -104,14 +104,15 @@ export function mainInputSearch(e) {
 }
 
 /**
- * @param  {} message
- * return a message
+ * Reprensents a message to display if the recipe array is empty
+ * @param  {string} message
  */
 const displayMessageNoResult = (message) =>
   (cardsContainer.innerHTML = message);
+
 /**
- * @param  {} array
- * Refresh Cards
+ * Represents the cards refresh
+ * @param  {} array - recipes
  */
 const refreshCard = (array) => {
   cardsContainer.innerHTML = '';
@@ -119,8 +120,8 @@ const refreshCard = (array) => {
 };
 
 /**
- * @param  {} recipes, array
- * Display Recipes
+ * Represents recipes display
+ * @param  {string[]} recipes, array
  */
 export const displayRecipes = (recipes) => {
   const searchResult = [...recipes];
@@ -133,9 +134,9 @@ export const displayRecipes = (recipes) => {
 };
 
 /**
- * @param  {} array
- * @param  {} container
- * Display Tags
+ * Represents Display Tags
+ * @param  {string[]} array
+ * @param  {HTMLElement} container
  */
 const displayTags = (array, container) => {
   const model = array
@@ -173,8 +174,8 @@ const searchByTypeTags = (e, i) => {
   });
 };
 
-// Event
 /**
+ * Represents input tags
  */
 export const searchAdvanced = () => {
   for (let i = 0; i < fieldSearchAdvanced.length; i++) {
@@ -208,7 +209,9 @@ export const searchAdvanced = () => {
     inputs[i].addEventListener('keyup', (e) => searchByTypeTags(e, i));
   }
 };
-
+/**
+ * Add a tag
+ */
 const addTag = (e) => {
   let value = e.target.textContent;
   let colorClass = e.target.parentElement.id;
@@ -242,11 +245,25 @@ const addTag = (e) => {
   btnClose.addEventListener('click', deleteFilterButton);
 };
 
+/**
+ * Remove a tag
+ * @param  {string} elementToRemove
+ * @param  {string} type
+ */
 const tagsToRemove = (elementToRemove, type) =>
   (tags[type] = tags[type].filter((tag) => tag !== elementToRemove));
 
+/**
+ * Add tags
+ * @param  {string} element
+ * @param  {string} type
+ */
 const tagsToAdd = (element, type) => tags[type].push(element);
 
+/**
+ * Update card
+ * @param  {string[]} array
+ */
 function updateCardByTags(array) {
   let result = [];
   array.filter((recipe) => {
@@ -267,7 +284,9 @@ function updateCardByTags(array) {
   });
   return result;
 }
-
+/**
+ * Delete a filter button
+ */
 const deleteFilterButton = (e) => {
   const btnSelectedAll = document.querySelectorAll('.btn__selected');
   const element = e.currentTarget.parentElement.parentElement;

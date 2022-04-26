@@ -1,9 +1,15 @@
+/**
+ * Represents a classlist
+ */
 export const setClass = (els, fnName, className) => {
   for (var i = 0; i < els.length; i++) {
     els[i].classList[fnName](className);
   }
 };
 
+/**
+ * Show and Hide suggestions
+ */
 export function showHide(fieldSearchAdvanced, article, element) {
   setClass(fieldSearchAdvanced, 'remove', 'active');
   setClass(article, 'remove', 'show');
