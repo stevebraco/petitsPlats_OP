@@ -22,6 +22,9 @@ export function showHide(fieldSearchAdvanced, article, element) {
   }
 }
 
+/**
+ * close and update fileds inputs
+ */
 export function onClickOutside(e, fieldSearchAdvanced, article) {
   if (e.target.className.includes('input-advanced')) {
     fieldSearchAdvanced.forEach((element) => {
@@ -41,37 +44,13 @@ export function onClickOutside(e, fieldSearchAdvanced, article) {
   }
 }
 
-export const filterButtonSearchAdvanced = (array, name, value) => {
-  if (name === 'appareils') {
-    array = array.filter((result) => {
-      return result.appliance.toLowerCase().includes(value.toLowerCase());
-    });
-  }
-
-  if (name === 'ingredients') {
-    array = array.filter((recipe) =>
-      recipe.ingredients.find((t) =>
-        t.ingredient.toLowerCase().includes(value.toLowerCase())
-      )
-    );
-  }
-
-  if (name === 'ustensiles') {
-    array = array
-      .filter((element) =>
-        element.ustensils.find((ustensil) =>
-          ustensil.toLowerCase().includes(value.toLowerCase())
-        )
-      )
-      .flat();
-  }
-  return array;
-};
-
-export const selectRecipesFilter = (arrFilterName, array) => {
+/**
+ * map ingredient, appareils, ustensils
+ */
+export const selectRecipesFilter = (filterName, array) => {
   let arr = [];
 
-  if (arrFilterName === 'ingredients') {
+  if (filterName === 'ingredients') {
     arr = array
       ?.map((element) =>
         element.ingredients.map((i) => i.ingredient.toLowerCase())
@@ -79,11 +58,11 @@ export const selectRecipesFilter = (arrFilterName, array) => {
       .flat();
   }
 
-  if (arrFilterName === 'appareils') {
+  if (filterName === 'appareils') {
     arr = array?.map((element) => element.appliance.toLowerCase());
   }
 
-  if (arrFilterName === 'ustensiles') {
+  if (filterName === 'ustensiles') {
     arr = array
       ?.map((element) =>
         element.ustensils.map((ustensil) => ustensil.toLowerCase())
@@ -93,6 +72,9 @@ export const selectRecipesFilter = (arrFilterName, array) => {
   return [...new Set(arr)];
 };
 
+/**
+ *  disbaled tag in suggestions
+ */
 export const buttonDisabled = (array, index) => {
   const article = document.querySelectorAll('.advanced-search__article');
   const btnSelectedAll = document.querySelectorAll('.btn__selected');
@@ -103,25 +85,26 @@ export const buttonDisabled = (array, index) => {
       [...tag].some((r) => {
         if (array.includes(r.textContent)) {
           r.classList.add('btn__disabled');
-        } else {
-          r.classList.remove('btn__disabled');
         }
       });
     }
   }
 };
 
-export const refreshCardTags = (array, tags) => {
+/**
+ *  updateCard with tags
+ */
+export function updateCardByTags(array, tags) {
   let result = [];
   array.filter((recipe) => {
-    let ingredients = tags.tagIngredient?.every((tag) =>
+    let ingredients = tags['ingredient'].every((tag) =>
       recipe.ingredients.find((t) =>
         t.ingredient.toLowerCase().includes(tag.toLowerCase())
       )
     );
-    let appliance = recipe.appliance.toLowerCase().includes(tags.tagAppliance);
+    let appliance = recipe.appliance.toLowerCase().includes(tags['appliance']);
 
-    let ustensils = tags.tagUstensils?.every((tag) =>
+    let ustensils = tags['ustensils'].every((tag) =>
       recipe.ustensils.find((t) => t.toLowerCase().includes(tag.toLowerCase()))
     );
 
@@ -130,4 +113,15 @@ export const refreshCardTags = (array, tags) => {
     }
   });
   return result;
-};
+}
+
+/**
+ * Remove a tag
+ */
+export const tagsToRemove = (elementToRemove, tags, type) =>
+  (tags[type] = tags[type].filter((tag) => tag !== elementToRemove));
+
+/**
+ * Add tags
+ */
+export const tagsToAdd = (element, tags, type) => tags[type].push(element);

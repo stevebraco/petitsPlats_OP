@@ -14,17 +14,18 @@ const article = document.querySelectorAll('.advanced-search__article');
 
 // Launch App
 const App = () => {
-  // uUer interaction input
+  // User interaction input
   inputMainSearch.addEventListener('input', mainInputSearch);
 
-  // TAGS
+  // Tags
   searchAdvanced();
 
+  // Close field inputs
   document.addEventListener('click', (e) =>
     onClickOutside(e, fieldSearchAdvanced, article)
   );
 
-  // Show Recipes
+  // Display Recipes
   displayRecipes(recipes);
 };
 
