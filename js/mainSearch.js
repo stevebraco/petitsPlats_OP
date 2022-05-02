@@ -36,26 +36,16 @@ let tagsSelected = {
  * Represents the result of the research
  */
 function resultMainSearch(array, inputSearchValue) {
-  let result = [];
-  for (let i = 0; i < array.length; i++) {
-    let ingredients = array[i].ingredients;
-    if (array[i].name.toLowerCase().includes(inputSearchValue)) {
-      result.push(array[i]);
-      continue;
-    }
+  let result = array.filter((recipe) => {
+    return (
+      recipe.name.toLowerCase().includes(inputSearchValue) ||
+      recipe.description.toLowerCase().includes(inputSearchValue) ||
+      recipe.ingredients.some((ingredient) =>
+        ingredient.ingredient.toLowerCase().includes(inputSearchValue)
+      )
+    );
+  });
 
-    if (array[i].description.toLowerCase().includes(inputSearchValue)) {
-      result.push(array[i]);
-      continue;
-    }
-
-    for (let j = 0; j < ingredients.length; j++) {
-      if (ingredients[j].ingredient.toLowerCase().includes(inputSearchValue)) {
-        result.push(array[i]);
-        break;
-      }
-    }
-  }
   return result;
 }
 
