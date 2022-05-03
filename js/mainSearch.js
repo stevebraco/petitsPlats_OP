@@ -79,6 +79,7 @@ export function mainInputSearch(e) {
       );
     }
   } else {
+    searchResult = [...recipes];
     refreshCard(dataFilter);
   }
 }
