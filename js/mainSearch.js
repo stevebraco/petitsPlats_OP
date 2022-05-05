@@ -1,5 +1,5 @@
 import { recipes } from '../data/recipes.js';
-import recipesFactory from './models/recipesModels.js';
+import recipesFactory from './Models/recipesModels.js';
 import { createElement } from './utils/createElement.js';
 import {
   buttonDisabled,
